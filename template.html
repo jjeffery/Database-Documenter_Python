@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database Documenter</title>
+    
+</head>
+<body>
+    <h1>All Tables</h1>
+<table border="1">
+    <thead>
+        <tr>
+            <td>Table Name</td><td>Table Description</td><td>RelID</td>
+        </tr>
+    </thead>
+	% for table in tables:
+    <tr>
+        <td><a href="#${tables[table].get_name()}">${tables[table].get_name()}</a></td><td>${tables[table].get_desc()}</td><td>${tables[table].get_relid()}</td>
+    </tr>
+	% endfor
+</table>
+% for table in tables:
+    <h2 id="${tables[table].get_name()}">Table: ${tables[table].get_name()}</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>Column</td><td>Type</td><td>Max Length</td><td>Column Description</td><td>Key Type</td>
+            </tr>
+        </thead>
+        % for col in tables[table].get_cols():
+        <tr>
+            <td>${col.get_name()}</td><td>${col.get_type()}</td><td>${col.get_length()}</td><td>${col.get_description()}</td><td>${col.get_key_type()}</td>
+        </tr>
+        % endfor
+    </table>
+% endfor
+</body>
+</html>
